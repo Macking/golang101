@@ -1,3 +1,3 @@
-module Macking/golang101
+module github.com/Macking/golang101
 
 go 1.11
