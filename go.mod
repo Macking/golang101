@@ -1,3 +1,3 @@
-module go101.org/golang101
+module Macking/golang101
 
 go 1.11
