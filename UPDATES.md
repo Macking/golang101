@@ -1,3 +1,7 @@
+### 1.13.j (2020/三月/26)
+
+* 改正了package name，为了go get能build正确
+
 ### 1.13.i (2019/十月/31)
 
 * 改正了“数组、切片和映射”一文中对[删除一段切片元素](https://gfw.go101.org/article/container.html#delete-slice-elements)一节中的错误代码。
