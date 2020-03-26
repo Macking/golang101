@@ -18,6 +18,13 @@ spec:
       containers:
         - name: golang101-service
           image: golang101:0.1
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
           ports:
             - containerPort: 12345
               protocol: TCP
