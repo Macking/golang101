@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang101-service
+  labels:
+    app: golang101-service
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: golang101-service
+  template:
+    metadata:
+      labels:
+        app: golang101-service
+    spec:
+      containers:
+        - name: golang101-service
+          image: golang101:0.1
+          ports:
+            - containerPort: 12345
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 12345
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          imagePullPolicy: IfNotPresent
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golang101-service
+  namespace: default
+  labels:
+    app: golang101-service
+spec:
+  ports:
+    - port: 12345
+      targetPort: 12345
+      nodePort: 30102
+  selector:
+    app: golang101-service
+  type: NodePort
